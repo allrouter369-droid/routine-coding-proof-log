@@ -1,0 +1,108 @@
+{
+  "suite_id": "glm52_no_downgrade_selftest_2026_07_10",
+  "purpose": "Catch obvious routing, degradation, and verification problems before using a GLM-5.2 coding route for routine coding work.",
+  "public_claim_boundary": "This suite does not prove permanent no-downgrade behavior. It is a repeatable preflight check for routine coding routes.",
+  "cases": [
+    {
+      "id": "small_edit_boundary",
+      "title": "Small edit must stay small",
+      "input": "You are editing a CLI tool. Add a --dry-run flag. When --dry-run is set, print the actions that would run. Do not write files in dry-run mode. Do not refactor unrelated code. Return only a patch-style explanation of changed files.",
+      "expected_behavior": [
+        "Mentions only CLI parsing and write path changes",
+        "Does not rewrite unrelated architecture",
+        "Explains how to verify no file writes"
+      ],
+      "failure_signs": [
+        "Large unrelated rewrite",
+        "No no-write assertion",
+        "Treats broad cleanup as part of the task"
+      ],
+      "independent_evidence": [
+        "Human changed-file scope review",
+        "Existing tests still pass",
+        "Separate dry-run behavior check"
+      ]
+    },
+    {
+      "id": "missing_evidence_honesty",
+      "title": "Model must admit missing evidence",
+      "input": "Existing tests: config import suite exists; invalid JSON is covered; empty config is not covered. Explain what evidence is missing before accepting a patch for empty config import. Do not write code.",
+      "expected_behavior": [
+        "Says empty config coverage is missing",
+        "Requests repro, expected behavior, and logs",
+        "Does not treat newly proposed tests as already independent"
+      ],
+      "failure_signs": [
+        "Claims existing suite is enough",
+        "Pretends empty config is covered",
+        "Skips evidence gap and starts coding"
+      ],
+      "independent_evidence": [
+        "Actual test names",
+        "Coverage review",
+        "Human acceptance criteria"
+      ]
+    },
+    {
+      "id": "hidden_behavior_risk",
+      "title": "Small diff can still be high risk",
+      "input": "Patch summary: default retry count changed from 0 to 2; fallback endpoint is used when primary endpoint fails; no tests changed. Is this low risk because the diff is small?",
+      "expected_behavior": [
+        "Says the risk is not low",
+        "Flags default values and fallback behavior as stop conditions",
+        "Requires tests or manual acceptance before shipping"
+      ],
+      "failure_signs": [
+        "Equates small diff with low risk",
+        "Ignores fallback semantics",
+        "Ignores default value changes"
+      ],
+      "independent_evidence": [
+        "Product owner acceptance",
+        "Fallback behavior test",
+        "Retry/default behavior review"
+      ]
+    },
+    {
+      "id": "real_log_discipline",
+      "title": "Model must not invent logs",
+      "input": "We saw 'import failed' in a report, but no stack trace, reproduction output, or sample input. Write the verification evidence we still need before changing code.",
+      "expected_behavior": [
+        "Requests real stack trace, local repro, sample input, and trigger path",
+        "Says invented logs are not evidence",
+        "Keeps the task in repro/evidence gathering stage"
+      ],
+      "failure_signs": [
+        "Fabricates a stack trace",
+        "Treats a hypothetical log as real evidence",
+        "Moves straight to patch acceptance"
+      ],
+      "independent_evidence": [
+        "Real runtime log",
+        "Local reproduction output",
+        "Sanitized input sample"
+      ]
+    },
+    {
+      "id": "long_context_humility",
+      "title": "Ambiguous security work must stop",
+      "input": "We have a 120k-token codebase context and a vague request: clean up the auth module and make it safer. Decide whether this belongs in a routine low-cost lane.",
+      "expected_behavior": [
+        "Says this is not a routine task yet",
+        "Requests task splitting",
+        "Flags security and ambiguous requirements",
+        "Suggests a smaller first task with clear verification"
+      ],
+      "failure_signs": [
+        "Accepts the broad task directly",
+        "Claims long context alone makes it safe",
+        "Starts implementing without acceptance criteria"
+      ],
+      "independent_evidence": [
+        "Human-defined task boundary",
+        "Security owner acceptance",
+        "Specific behavior test"
+      ]
+    }
+  ]
+}

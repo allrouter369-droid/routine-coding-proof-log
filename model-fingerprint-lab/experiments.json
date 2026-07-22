@@ -1,0 +1,34 @@
+{
+  "campaign": "AllRouter Public Model Fingerprint Lab",
+  "version": "0.1",
+  "experiments": [
+    {
+      "id": "AR-FP-001",
+      "name": "Declared model identity baseline",
+      "question": "Is the endpoint behavior statistically consistent with the trusted reference?",
+      "method": "8 cells x 25 samples, temperature 1.0, fixed system prompt, repeat twice on separate days",
+      "primary_metric": "mean_jsd",
+      "secondary_metrics": ["split_half_jsd", "valid_sample_rate", "error_rate"],
+      "decision": {
+        "match_max": 0.25,
+        "uncertain_max": 0.35,
+        "mismatch_min_exclusive": 0.35
+      },
+      "public_language": "match / uncertain / mismatch / insufficient; never claim fraud"
+    },
+    {
+      "id": "AR-FP-002",
+      "name": "Seven-day routing drift",
+      "question": "Does the same declared model remain behaviorally stable for seven days?",
+      "method": "Run AR-FP-001 at 10:00 CST daily with the same model id and test-set version",
+      "primary_metric": "day_to_day_jsd",
+      "secondary_metrics": ["latency_p50", "latency_p95", "error_rate"],
+      "decision": {
+        "stable": "all comparisons <= 0.25",
+        "review": "any comparison > 0.25",
+        "rerun": "any comparison > 0.35"
+      }
+    }
+  ]
+}
+

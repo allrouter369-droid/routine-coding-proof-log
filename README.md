@@ -23,6 +23,11 @@ How to use this repo:
 - Use the `routine-task` issue template.
 - Keep prompts and outputs short and concrete.
 
+Public experiments:
+
+- [Model Fingerprint Lab](model-fingerprint-lab/README.md): fixed protocol,
+  decision thresholds, public report schema, and result-card template.
+
 ## 2026-06-27 note: small refactors are not always routine
 
 Today’s proof log update:

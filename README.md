@@ -9,14 +9,14 @@ Model IDs, provider defaults, and relay mappings change quickly. A successful HT
 ### Current migration deadlines (verified on 2026-07-26)
 
 - GitHub Models will be fully retired on 2026-07-30, including the model catalog, playground, inference API, and BYOK.
-- GitHub Copilot will retire Gemini 3 Pro and Gemini 2.5 Pro on 2026-07-31.
+- GitHub Copilot will retire Gemini 2.5 Pro and Gemini 3 Flash on 2026-07-31; GitHub suggests Gemini 3.1 Pro and Gemini 3.5 Flash as the respective alternatives.
 - GitHub Models added a model-catalog endpoint, which is a useful reminder not to hard-code one static model list forever.
 - Copilot is expanding automatic model selection, making task-based routing and fallback behavior a mainstream workflow.
 
 Official notices:
 
 - https://github.blog/changelog/2026-07-01-github-models-is-being-fully-retired-on-july-30-2026/
-- https://github.blog/changelog/2026-07-01-upcoming-model-retirements-gemini-3-pro-and-gemini-2-5-pro/
+- https://github.blog/changelog/2026-07-02-upcoming-deprecation-of-gemini-2-5-pro-and-gemini-3-flash/
 - https://github.blog/changelog/2026-07-09-github-models-api-now-supports-model-catalog-endpoint/
 - https://github.blog/changelog/2026-07-07-auto-model-selection-is-now-generally-available-in-copilot-in-visual-studio-2022/
 

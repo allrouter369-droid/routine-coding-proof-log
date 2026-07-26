@@ -1,22 +1,37 @@
 # allrouter-routine-coding-proof-log
 
-
 A small public proof log for routine AI coding tasks.
-
 
 ## Model migration and relay verification community
 
 Model IDs, provider defaults, and relay mappings change quickly. A successful HTTP 200 response does not prove that the requested model was preserved end to end.
 
-For example, DeepSeek retired the legacy `deepseek-chat` and `deepseek-reasoner` IDs on 2026-07-24. Before trusting any compatible API or relay, check:
+### Current migration deadlines (verified on 2026-07-26)
+
+- GitHub Models will be fully retired on 2026-07-30, including the model catalog, playground, inference API, and BYOK.
+- GitHub Copilot will retire Gemini 3 Pro and Gemini 2.5 Pro on 2026-07-31.
+- GitHub Models added a model-catalog endpoint, which is a useful reminder not to hard-code one static model list forever.
+- Copilot is expanding automatic model selection, making task-based routing and fallback behavior a mainstream workflow.
+
+Official notices:
+
+- https://github.blog/changelog/2026-07-01-github-models-is-being-fully-retired-on-july-30-2026/
+- https://github.blog/changelog/2026-07-01-upcoming-model-retirements-gemini-3-pro-and-gemini-2-5-pro/
+- https://github.blog/changelog/2026-07-09-github-models-api-now-supports-model-catalog-endpoint/
+- https://github.blog/changelog/2026-07-07-auto-model-selection-is-now-generally-available-in-copilot-in-visual-studio-2022/
+
+Before trusting any compatible API or relay, check:
 
 1. The requested model ID and the model field returned by the API.
-2. Whether an old ID raises a clear error, maps to a documented alias, or silently switches models.
+2. Whether a retired ID raises a clear error, maps to a documented alias, or silently switches models.
 3. Tool calling, structured output, context length, and error boundaries on one fixed test set.
 4. Cache behavior and fallback behavior when the preferred route fails.
 5. Cost and latency by task class, instead of sending every task to the most expensive model.
+6. Whether your application can discover currently available models instead of relying only on hard-coded IDs.
 
 Join the Telegram group for migration alerts, reproducible relay checks, and real AI coding routing tests: https://t.me/+13g2ma9APiU0YjRl
+
+After joining, reply with **GitHub Models + your client or stack** to get the matching migration checklist.
 
 Disclosure: this community is operated by the AllRouter team. Never post API keys, private code, full bills, or sensitive logs. Model IDs shown by a relay may be compatibility aliases and should not be treated as official vendor model names without vendor confirmation.
 
